@@ -65,10 +65,11 @@ $(document).ready(function(){
 		.on("mouseup", function(event){ canvas.endScroll() })
 		.on("mouseover", function(event){ canvas.endScroll() })
 		.on("dblclick", function(event){ canvas.center() })
-		.on("wheel", function(event){ canvas.zoom(event.originalEvent) });
-//		.on("mousedown", function(event){ canvas.startScroll(event) })
-//		.on("mousedown", function(event){ canvas.startScroll(event) })
-//		.on("mousedown", function(event){ canvas.startScroll(event) })
+		.on("wheel", function(event){ canvas.zoom(event.originalEvent) })
+		.on("touchstart", function(event){ canvas.startTouchScroll(event.originalEvent) })
+		.on("touchmove", function(event){ canvas.touchScroll(event.originalEvent) })
+		.on("touchend", function(event){ canvas.endScroll() })
+		.on("touchcansel", function(event){ canvas.endScroll() });
 	canvas.addFunction().setExpression('x*x'); //.setColor("#000000").toggleEnabled(true);
 	canvas.redraw();
 });
