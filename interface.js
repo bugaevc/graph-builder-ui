@@ -51,9 +51,14 @@ $(document).ready(function(){
 		.end();
 	
 	var graph = $("#graph");
-	graph[0].width = graph.parent().width();
 	var canvas = new Canvas();
 	canvas.attachCanvas("graph");
-	canvas.resize();
-	canvas.addFunction().setExpression('x'); //.setColor("#000000").toggleEnabled(true);
+	$(window).resize(function(){
+		graph
+			.attr("width", graph.parent().width())
+			.attr("height", graph.parent().height());
+		canvas.resize();
+	}).resize();
+	canvas.addFunction().setExpression('x*x'); //.setColor("#000000").toggleEnabled(true);
+	canvas.redraw();
 });

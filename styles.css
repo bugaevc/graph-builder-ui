@@ -83,6 +83,12 @@ hidden {
 .controls .edit .button.slide:hover {
     background: #cbd0a7;
 }
+.gallery-item {
+    float: left;
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
 
 .clearfix:after {
     content: "";
@@ -91,9 +97,9 @@ hidden {
     display: block;
     clear: both;
 }
-.gallery-item {
-    float: left;
-    margin: 5px;
-    padding: 10px;
-    cursor: pointer;
+.fill {
+	display: block;
+	margin: 0;
+	width: 100%;
+	height: 100%;
 }
