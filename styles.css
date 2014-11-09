@@ -1,0 +1,100 @@
+/*
+	TEMP and WIP
+	Color Scheme:
+		light gray #eee;
+		green #34d96e;
+		green 2 #3dff7e;
+		dirty snow #cbd0a7;
+		dirty snow 2 #a1c4a6;
+		blue #8aceff;
+*/
+p {
+	margin: 0;
+	padding: 0;
+}
+.controls {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    width: 300px;
+    margin: 20px auto;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background: white;
+}
+.controls ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.controls .function {
+    display: block;
+    padding: 5px;
+    cursor: pointer;
+    transition: background 0.5s;
+}
+.controls .function:not(.current):hover {
+    background: #eee;
+}
+.controls .function p {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 30px;
+}
+.controls .function .editor {
+    outline: none;
+}
+.controls .function.current p {
+    border: 1px solid #8aceff;
+    border-radius: 5px;
+    box-shadow: 0 0 2px 1px #8aceff;
+}
+hidden {
+    margin: 0;
+    padding: 0;
+}
+.controls .edit {
+    display: none;
+}
+.controls .edit .button {
+    padding: 10px 20px;
+    margin: 5px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    width: auto;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.controls .edit .button.go {
+    float: right;
+    background: #34d96e;
+}
+.controls .edit .button.go:hover {
+    background: #3dff7e;
+}
+.controls .edit .button.slide {
+    float: left;
+    background: #a1c4a6;
+    font-size: initial;
+    width: 100px;
+}
+.controls .edit .button.slide:hover {
+    background: #cbd0a7;
+}
+
+.clearfix:after {
+    content: "";
+    width: 0;
+    height: 0;
+    display: block;
+    clear: both;
+}
+.gallery-item {
+    float: left;
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
