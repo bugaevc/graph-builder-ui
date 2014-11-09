@@ -1,0 +1,200 @@
+<html>
+<head>
+	<title>uitest</title>
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<style>
+		/*
+			TEMP and WIP
+			Color Scheme:
+				light gray #eee;
+				green #34d96e;
+				green 2 #3dff7e;
+				dirty snow #cbd0a7;
+				dirty snow 2 #a1c4a6;
+				blue #8aceff;
+		*/
+		p {
+			margin: 0;
+			padding: 0;
+		}
+		.controls {
+			position: fixed;
+			right: 20px;
+			top: 20px;
+			width: 300px;
+			margin: 20px auto;
+			padding: 10px;
+			border: 1px solid black;
+			border-radius: 5px;
+			background: white;
+		}
+		.controls ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		.controls .function {
+			display: block;
+			padding: 5px;
+			cursor: pointer;
+			transition: background 0.5s;
+		}
+		.controls .function:not(.current):hover {
+			background: #eee;
+		}
+		.controls .function p {
+			display: inline-block;
+			padding: 5px 10px;
+			font-size: 30px;
+		}
+		.controls .function .editor {
+			outline: none;
+		}
+		.controls .function.current p {
+			border: 1px solid #8aceff;
+			border-radius: 5px;
+			box-shadow: 0 0 2px 1px #8aceff;
+		}
+		hidden {
+			margin: 0;
+			padding: 0;
+		}
+		.controls .edit {
+			display: none;
+		}
+		.controls .edit .button {
+			padding: 10px 20px;
+			margin: 5px;
+			color: white;
+			font-size: 20px;
+			text-align: center;
+			width: auto;
+			border-radius: 10px;
+			cursor: pointer;
+			transition: background 0.3s;
+		}
+		.controls .edit .button.go {			
+			float: right;
+			background: #34d96e;
+		}
+		.controls .edit .button.go:hover {
+			background: #3dff7e;
+		}
+		.controls .edit .button.slide {
+			float: left;
+			background: #a1c4a6;
+			font-size: initial;
+			width: 100px;
+		}
+		.controls .edit .button.slide:hover {
+			background: #cbd0a7;
+		}
+		
+		.clearfix:after {
+			content: "";
+			width: 0;
+			height: 0;
+			display: block;
+			clear: both;
+		}
+		.gallery-item {
+			float: left;
+			margin: 5px;
+			padding: 10px;
+			background: #eee;
+			cursor: pointer;
+		}
+	</style>
+	
+</head>
+<body>
+	<div class="controls">
+		<ul>
+			<li class="function"><p>y=<span class="editor">2x</span></p></li>
+			<li class="function"><p>y=<span class="editor">3x+1</span></p></li>
+			<li class="function"><p>y=<span class="editor">3x+2</span></p></li>
+			<li class="function"><p>y=<span class="editor">3x+3</span></p></li>
+			<li class="function"><p>y=<span class="editor">3x+4</span></p></li>
+			<li class="function"><p>y=<span class="editor">3x+5</span></p></li>
+			<li class="function"><p>y=<span class="editor">3x+6</span></p></li>
+			<li class="function"><p>y=<span class="editor">3x+7</span></p></li>
+			<li class="function"><p>y=<span class="editor">3x+8</span></p></li>
+		</ul>
+		<div class="edit">
+			<div class="clearfix">
+				<div class="button go">Go!</div>
+				<div class="button slide">Show functions</div>
+			</div>
+			<div class="gallery clearfix">
+				<div class="gallery-item"><p>sin</p></div>
+				<div class="gallery-item"><p>cos</p></div>
+				<div class="gallery-item"><p>tan</p></div>
+				<div class="gallery-item"><p>pow</p></div>
+			</div>
+		</div>
+	</div>
+	<div><canvas id="graph"></canvas></div>
+	<script src="http://anton.kroko.ru/builder/unstable/core.js"></script>
+	<script>
+	$(document).ready(function(){		
+		var galleryShown = false;
+		$(".controls .edit .gallery").hide();
+		
+		$(".controls").on("click", ".function:not(.current)", function(){
+			var curFunc = $(this).closest(".function"); // curretnly equals to $(this)
+			var hidden = '<div class="hidden"></div>';
+			// workaround strange obj.prevAll().wrapAll() behaviuor (reverse order)
+			function _prevAll(obj){
+				var first = obj.siblings().addBack().first().not(obj);
+				return first.nextUntil(obj).add(first);
+			}
+			_prevAll(curFunc).wrapAll(hidden);
+			curFunc.nextAll().wrapAll(hidden);
+			curFunc.closest(".controls")
+				.find(".edit")
+					.slideDown()
+				.end()
+				.find(".hidden")
+					.slideUp()
+				.end();
+			curFunc.addClass("current");
+			curFunc.find(".editor").prop("contenteditable", "true").focus();
+		});
+		$(".controls .edit .button")
+			.filter(".slide")
+				.click(function(){
+					$(this).closest(".edit").find(".gallery").slideToggle();
+					galleryShown = !galleryShown;
+					$(this).text((galleryShown?"Hide":"Show") + " functions");
+				})
+			.end()
+			.filter(".go")
+				.click(function(){
+					$(this).closest(".controls")
+						.find(".hidden")
+							.slideDown(function(){
+								$(this).children().unwrap();
+							})
+						.end()
+						.find(".current")
+							.removeClass("current")
+							.find(".editor")
+								.prop("contenteditable", "false")
+							.end()
+						.end()
+						.find(".edit")
+							.slideUp()
+						.end();
+				})
+			.end();
+		
+		var graph = $("#graph");
+		graph.width(graph.parent().width());
+		var canvas = new Canvas();
+		canvas.attachCanvas("graph");
+		canvas.resize();
+		canvas.addFunction().setExpression('x'); //.setColor("#000000").toggleEnabled(true);
+	});
+	</script>
+</body>
+</html>
