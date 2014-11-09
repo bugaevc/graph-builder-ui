@@ -51,7 +51,7 @@ $(document).ready(function(){
 		.end();
 	
 	var graph = $("#graph");
-	graph.width(graph.parent().width());
+	graph[0].width = graph.parent().width();
 	var canvas = new Canvas();
 	canvas.attachCanvas("graph");
 	canvas.resize();
