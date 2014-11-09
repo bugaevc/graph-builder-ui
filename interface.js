@@ -59,6 +59,16 @@ $(document).ready(function(){
 			.attr("height", graph.parent().height());
 		canvas.resize();
 	}).resize();
+	graph
+		.on("mousedown", function(event){ canvas.startScroll(event.originalEvent) })
+		.on("mousemove", function(event){ canvas.scroll(event.originalEvent) })
+		.on("mouseup", function(event){ canvas.endScroll() })
+		.on("mouseover", function(event){ canvas.endScroll() })
+		.on("dblclick", function(event){ canvas.center() })
+		.on("wheel", function(event){ canvas.zoom(event.originalEvent) });
+//		.on("mousedown", function(event){ canvas.startScroll(event) })
+//		.on("mousedown", function(event){ canvas.startScroll(event) })
+//		.on("mousedown", function(event){ canvas.startScroll(event) })
 	canvas.addFunction().setExpression('x*x'); //.setColor("#000000").toggleEnabled(true);
 	canvas.redraw();
 });
