@@ -35,8 +35,8 @@ $(document).ready(function(){
 		var fBody = '3*x+3';
 		var newFunc = canvas.addFunction();
 		newFunc.setExpression(fBody);
-		var fHtml = '<li class="function" data-funcs-index="' +
-			funcs.length + '"><p>y=<span class="editor">' + fBody + '</span></p></li>';
+		var fHtml = '<li class="function" data-funcs-index="' +	funcs.length + '">' +
+			'<p>y=<span class="editor">' + fBody + '</span></p></li>';
 		$(this).closest(".controls").find("ul").append(fHtml);
 		funcs.push(newFunc);
 		canvas.redraw();
