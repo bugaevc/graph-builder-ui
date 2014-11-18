@@ -13,6 +13,9 @@ $(document).ready(function(){
 		_prevAll(curFunc).wrapAll(hidden);
 		curFunc.nextAll().wrapAll(hidden);
 		curFunc.closest(".controls")
+			.find(".add")
+				.wrapAll(hidden)
+			.end()
 			.find(".edit")
 				.slideDown()
 			.end()
@@ -21,6 +24,28 @@ $(document).ready(function(){
 			.end();
 		curFunc.addClass("current");
 		curFunc.find(".editor").prop("contenteditable", "true").focus();
+	});
+	
+	funcs = new Array();
+	var graph = $("#graph");
+	var canvas = new Canvas();
+	canvas.attachCanvas("graph");
+	
+	$(".controls .add").click(function(){
+		var fBody = '3*x+3';
+		var newFunc = canvas.addFunction();
+		newFunc.setExpression(fBody);
+		var fHtml = '<li class="function" data-funcs-index="' +
+			funcs.length + '"><p>y=<span class="editor">' + fBody + '</span></p></li>';
+		$(this).closest(".controls").find("ul").append(fHtml);
+		funcs.push(newFunc);
+		canvas.redraw();
+	});
+	$(".controls").on("input", ".function .editor", function(){
+		var $this = $(this);
+		var ind = $this.closest(".function").data("funcs-index");
+		funcs[ind].setExpression($this.text());
+		canvas.redraw();
 	});
 	$(".controls .edit .button")
 		.filter(".slide")
@@ -50,9 +75,6 @@ $(document).ready(function(){
 			})
 		.end();
 	
-	var graph = $("#graph");
-	var canvas = new Canvas();
-	canvas.attachCanvas("graph");
 	$(window).resize(function(){
 		graph
 			.attr("width", graph.parent().width())
@@ -70,6 +92,4 @@ $(document).ready(function(){
 		.on("touchmove", function(event){ canvas.touchScroll(event.originalEvent) })
 		.on("touchend", function(event){ canvas.endScroll() })
 		.on("touchcansel", function(event){ canvas.endScroll() });
-	canvas.addFunction().setExpression('x*x'); //.setColor("#000000").toggleEnabled(true);
-	canvas.redraw();
 });
