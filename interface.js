@@ -1,4 +1,5 @@
-$(document).ready(function(){		
+$(document).ready(function(){
+	
 	var galleryShown = false;
 	$(".controls .edit .gallery").hide();
 	
