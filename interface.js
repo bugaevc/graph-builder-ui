@@ -4,7 +4,7 @@ $(document).ready(function(){
 	$(".controls .edit .gallery").hide();
 	
 	$(".controls").on("click", ".function:not(.current) p", function(){
-		var curFunc = $(this).closest(".function"); // curretnly equals to $(this)
+		var curFunc = $(this).closest(".function");
 		var hidden = '<div class="hidden"></div>';
 		// workaround strange obj.prevAll().wrapAll() behaviuor (reverse order)
 		function _prevAll(obj){

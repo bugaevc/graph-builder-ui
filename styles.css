@@ -57,7 +57,7 @@ p {
     box-shadow: 0 0 2px 1px #8aceff;
 }
 .controls .function .options {
-    font-size: 20px;
+    font-size: 15px;
     margin: 0;
     margin-left: auto;
     width: 100px;
@@ -70,7 +70,8 @@ p {
 .controls .function .input-color {
     width: 1em;
     height: 100%;
-    box-shadow: 0 0 1px 0 black, inset 0 0 10px 0 white;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px white;
 }
 .controls .function .input-color input[type="color"] {
     display: block;
