@@ -3,38 +3,6 @@ $(document).ready(function(){
 	var galleryShown = false;
 	$(".controls .edit .gallery").hide();
 	
-	$(".controls").on("click", ".function:not(.current) p", function(){
-		var curFunc = $(this).closest(".function");
-		var hidden = '<div class="hidden"></div>';
-		// workaround strange obj.prevAll().wrapAll() behaviuor (reverse order)
-		function _prevAll(obj){
-			var first = obj.siblings().addBack().first().not(obj);
-			return first.nextUntil(obj).add(first);
-		}
-		_prevAll(curFunc).filter(".function").wrapAll(hidden);
-		curFunc.nextAll().filter(".function").wrapAll(hidden);
-		curFunc.closest(".controls")
-			.find(".add")
-				.wrapAll(hidden)
-			.end()
-			.find(".edit")
-				.slideDown()
-			.end()
-			.find(".hidden")
-				.slideUp()
-			.end();
-		curFunc.addClass("current");
-		curFunc.find(".editor").prop("contenteditable", "true").focus();
-	});
-    
-    $('.controls').on("input", '.function .input-color input[type="color"]', function(){
-        var $this = $(this);
-        $this.closest('.input-color').css("background-color", $this.val());        
-		var ind = $this.closest(".function").data("funcs-index");
-		canvas.getFunction(ind).setColor($this.val());
-		canvas.redraw();
-    });
-	
 	var graph = $("#graph");
 	var canvas = new Canvas();
 	canvas.attachCanvas("graph");
@@ -60,6 +28,61 @@ $(document).ready(function(){
             .end();
 		canvas.redraw();
 	});
+    
+    $('.controls').on("change", '.function .options input[type="checkbox"]', function(){
+        var $this = $(this);
+        var ind = $this.closest(".function").data("funcs-index");
+        canvas.getFunction(ind).toggleEnabled($this.prop("checked"));
+        canvas.redraw();
+    });
+    $('.controls').on("click", '.function .options .remove', function(){
+        var $function = $(this).closest(".function");
+        var ind = $function.data("funcs-index");
+        canvas.deleteFunction(ind);
+        canvas.redraw();
+        var editPanel = $(this).closest(".controls").find(".edit");
+        if(editPanel.filter(":visible").length > 0)
+            editPanel.find(".button.go").click();
+        $function.nextAll().find(".function").addBack().filter(".function").each(function(){
+            $(this).data("funcs-index", $(this).data("funcs-index")-1);
+        });
+        $function.slideUp(function(){
+            $function.remove();
+        });
+    });
+    $('.controls').on("input", '.function .options .input-color input[type="color"]', function(){
+        var $this = $(this);
+        $this.closest('.input-color').css("background-color", $this.val());
+		var ind = $this.closest(".function").data("funcs-index");
+		canvas.getFunction(ind).setColor($this.val());
+		canvas.redraw();
+    });
+    
+	$(".controls").on("click", ".function:not(.current) p", function(){
+		var curFunc = $(this).closest(".function");
+		var hidden = '<div class="hidden"></div>';
+		// workaround strange obj.prevAll().wrapAll() behaviuor (reverse order)
+		function _prevAll(obj){
+			var first = obj.siblings().addBack().first().not(obj);
+			return first.nextUntil(obj).add(first);
+		}
+		_prevAll(curFunc).filter(".function").wrapAll(hidden);
+		curFunc.nextAll().filter(".function").wrapAll(hidden);
+		curFunc.closest(".controls")
+			.find(".add")
+				.wrapAll(hidden)
+			.end()
+			.find(".edit")
+				.slideDown()
+			.end()
+			.find(".hidden")
+				.slideUp()
+			.end();
+		curFunc.addClass("current");
+		curFunc.find(".editor").prop("contenteditable", "true").focus();
+	});
+
+	
 	$(".controls").on("input", ".function .editor", function(){
 		var $this = $(this);
 		var ind = $this.closest(".function").data("funcs-index");

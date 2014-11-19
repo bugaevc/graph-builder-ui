@@ -67,6 +67,9 @@ p {
     justify-content: space-between;
     align-items: center;
 }
+.controls .function .options * {
+    cursor: pointer;
+}
 .controls .function .input-color {
     width: 1em;
     height: 100%;
@@ -79,7 +82,6 @@ p {
     height: 100%;
     border: none;
     padding: 0;
-    cursor: pointer;
     margin: 0;
     opacity: 0;
 }
