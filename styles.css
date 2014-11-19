@@ -30,6 +30,9 @@ p {
     margin: 0;
     padding: 0;
 }
+.controls ul .template {
+    display: none;
+}
 .controls .function {
     display: block;
     padding: 5px;

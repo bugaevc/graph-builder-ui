@@ -11,8 +11,8 @@ $(document).ready(function(){
 			var first = obj.siblings().addBack().first().not(obj);
 			return first.nextUntil(obj).add(first);
 		}
-		_prevAll(curFunc).wrapAll(hidden);
-		curFunc.nextAll().wrapAll(hidden);
+		_prevAll(curFunc).filter(".function").wrapAll(hidden);
+		curFunc.nextAll().filter(".function").wrapAll(hidden);
 		curFunc.closest(".controls")
 			.find(".add")
 				.wrapAll(hidden)
@@ -42,13 +42,20 @@ $(document).ready(function(){
 	$(".controls .add").click(function(){
 		var fBody = '3*x+3';
 		var newFunc = canvas.addFunction();
-        // Note: data-funcs-index starts at 0 as this is the format that's used by canvas class
-		var fHtml = $('<li class="function" data-funcs-index="' +	canvas.functions.length + '">' +
-			'<p>y=<span class="editor">' + fBody + '</span></p>' +
-            '<div class="input-color"><input type="color"/></div></li>');
 		newFunc.setExpression(fBody);
+        var fHtml = $(this).closest(".controls").find("ul .template").clone();
 		$(this).closest(".controls").find("ul").append(fHtml);
-        fHtml.find('input[type="color"]').val("#ff5555").trigger("input");
+        fHtml
+            .removeClass("template")
+            .addClass("function")
+            .data("funcs-index", canvas.functions.length)
+            .find(".editor")
+                .html(fBody)
+            .end()
+            .find('input[type="color"]')
+                .val("#ff5555")
+                .trigger("input")
+            .end();
 		canvas.redraw();
 	});
 	$(".controls").on("input", ".function .editor", function(){
