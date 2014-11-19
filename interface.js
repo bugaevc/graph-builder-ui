@@ -3,7 +3,7 @@ $(document).ready(function(){
 	var galleryShown = false;
 	$(".controls .edit .gallery").hide();
 	
-	$(".controls").on("click", ".function:not(.current)", function(){
+	$(".controls").on("click", ".function:not(.current) p", function(){
 		var curFunc = $(this).closest(".function"); // curretnly equals to $(this)
 		var hidden = '<div class="hidden"></div>';
 		// workaround strange obj.prevAll().wrapAll() behaviuor (reverse order)
@@ -26,6 +26,14 @@ $(document).ready(function(){
 		curFunc.addClass("current");
 		curFunc.find(".editor").prop("contenteditable", "true").focus();
 	});
+    
+    $('.controls').on("input", '.function .input-color input[type="color"]', function(){
+        var $this = $(this);
+        $this.closest('.input-color').css("background-color", $this.val());        
+		var ind = $this.closest(".function").data("funcs-index");
+		funcs[ind].setColor($this.val());
+		canvas.redraw();
+    });
 	
 	funcs = new Array();
 	var graph = $("#graph");
@@ -36,10 +44,12 @@ $(document).ready(function(){
 		var fBody = '3*x+3';
 		var newFunc = canvas.addFunction();
 		newFunc.setExpression(fBody);
-		var fHtml = '<li class="function" data-funcs-index="' +	funcs.length + '">' +
-			'<p>y=<span class="editor">' + fBody + '</span></p></li>';
+		var fHtml = $('<li class="function" data-funcs-index="' +	funcs.length + '">' +
+			'<p>y=<span class="editor">' + fBody + '</span></p>' +
+            '<div class="input-color"><input type="color"/></div></li>');
 		$(this).closest(".controls").find("ul").append(fHtml);
 		funcs.push(newFunc);
+        fHtml.find('input[type="color"]').val("#ff5555").trigger("input");
 		canvas.redraw();
 	});
 	$(".controls").on("input", ".function .editor", function(){
