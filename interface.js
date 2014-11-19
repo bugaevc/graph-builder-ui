@@ -31,11 +31,10 @@ $(document).ready(function(){
         var $this = $(this);
         $this.closest('.input-color').css("background-color", $this.val());        
 		var ind = $this.closest(".function").data("funcs-index");
-		funcs[ind].setColor($this.val());
+		canvas.getFunction(ind).setColor($this.val());
 		canvas.redraw();
     });
 	
-	funcs = new Array();
 	var graph = $("#graph");
 	var canvas = new Canvas();
 	canvas.attachCanvas("graph");
@@ -43,19 +42,19 @@ $(document).ready(function(){
 	$(".controls .add").click(function(){
 		var fBody = '3*x+3';
 		var newFunc = canvas.addFunction();
-		newFunc.setExpression(fBody);
-		var fHtml = $('<li class="function" data-funcs-index="' +	funcs.length + '">' +
+        // Note: data-funcs-index starts at 0 as this is the format that's used by canvas class
+		var fHtml = $('<li class="function" data-funcs-index="' +	canvas.functions.length + '">' +
 			'<p>y=<span class="editor">' + fBody + '</span></p>' +
             '<div class="input-color"><input type="color"/></div></li>');
+		newFunc.setExpression(fBody);
 		$(this).closest(".controls").find("ul").append(fHtml);
-		funcs.push(newFunc);
         fHtml.find('input[type="color"]').val("#ff5555").trigger("input");
 		canvas.redraw();
 	});
 	$(".controls").on("input", ".function .editor", function(){
 		var $this = $(this);
 		var ind = $this.closest(".function").data("funcs-index");
-		funcs[ind].setExpression($this.text());
+		canvas.getFunction(ind).setExpression($this.text());
 		canvas.redraw();
 	});
 	$(".controls .edit .button")
