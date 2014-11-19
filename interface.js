@@ -46,8 +46,10 @@ $(document).ready(function(){
         var fHtml = $(this).closest(".controls").find("ul .template").clone();
 		$(this).closest(".controls").find("ul").append(fHtml);
         fHtml
+            .hide()
             .removeClass("template")
             .addClass("function")
+            .slideDown()
             .data("funcs-index", canvas.functions.length)
             .find(".editor")
                 .html(fBody)

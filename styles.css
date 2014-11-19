@@ -34,7 +34,8 @@ p {
     display: none;
 }
 .controls .function {
-    display: block;
+    display: flex;
+    align-items: center;
     padding: 5px;
     transition: background 0.5s;
 }
@@ -56,19 +57,20 @@ p {
     box-shadow: 0 0 2px 1px #8aceff;
 }
 .controls .function .options {
-    font-size: 30px;
-    margin: 5px 0;
-    float: right;
+    font-size: 20px;
+    margin: 0;
+    margin-left: auto;
+    width: 100px;
     height: 1em;
-}
-.controls .function .options > * {
-    margin-left: 5px;
+    padding: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .controls .function .input-color {
-    float: right;
     width: 1em;
     height: 100%;
-    box-shadow: 0 0 1px 0 black;
+    box-shadow: 0 0 1px 0 black, inset 0 0 10px 0 white;
 }
 .controls .function .input-color input[type="color"] {
     display: block;
@@ -94,7 +96,7 @@ p {
 .controls .add:hover {
     background: #eee;
 }
-hidden {
+.hidden {
     margin: 0;
     padding: 0;
 }
