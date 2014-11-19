@@ -54,6 +54,8 @@ p {
     box-shadow: 0 0 2px 1px #8aceff;
 }
 .controls .function .input-color {
+    font-size: 30px;
+    margin: 5px 0;
     float: right;
     width: 1em;
     height: 1em;
