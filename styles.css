@@ -13,17 +13,22 @@ p {
 	margin: 0;
 	padding: 0;
 }
+
+body {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 0;
+    /*width: 100vw;
+    height: 100vh;*/
+}
+
 .controls {
-    position: fixed;
-    right: 20px;
-    top: 20px;
-    width: 300px;
-	max-height: 300px;
+    flex: 1 1 200px;
 	overflow: auto;
     padding: 10px;
-    border-radius: 5px;
     background: white;
 	box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.5);
+    height: -webkit-min-content;
 }
 .controls ul {
     list-style: none;
@@ -67,23 +72,14 @@ p {
     justify-content: space-between;
     align-items: center;
 }
+
+.controls .function .options .color-input {
+    border: none;
+    background: transparent;
+}
+
 .controls .function .options * {
     cursor: pointer;
-}
-.controls .function .input-color {
-    width: 1em;
-    height: 100%;
-    border-radius: 10px;
-    box-shadow: inset 0 0 10px white;
-}
-.controls .function .input-color input[type="color"] {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: none;
-    padding: 0;
-    margin: 0;
-    opacity: 0;
 }
 .controls .add {
     height: 2em;
@@ -147,9 +143,9 @@ p {
     display: block;
     clear: both;
 }
-.fill {
-	display: block;
-	margin: 0;
-	width: 100%;
-	height: 100%;
+canvas#graph {
+    flex: 3 1 600px;
+    align-self: stretch;
+    position: relative;
 }
+

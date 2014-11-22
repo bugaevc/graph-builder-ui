@@ -1,9 +1,12 @@
 <html>
 <head>
 	<title>uitest</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="../jquery-1.11.1.js"></script>
 	<link rel="stylesheet" href="styles.css"/>
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src='http://bgrins.github.io/spectrum/spectrum.js'></script>
+    <link rel='stylesheet' href='http://bgrins.github.io/spectrum/spectrum.css' />
 </head>
 <body>
 	<div class="controls">
@@ -12,7 +15,7 @@
                 <p>y=<span class="editor"></span></p>
                 <form class="options clearfix">
                     <input type="checkbox" checked/>
-                    <div class="input-color"><input type="color"/></div>
+                    <input type="color"/>
                     <i class="remove fa fa-times"></i>
                 </form>
             </li>
@@ -31,7 +34,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="fill"><canvas id="graph"></canvas></div>
+	<canvas id="graph"></canvas>
 	<script src="http://anton.kroko.ru/builder/unstable/core.js"></script>
 	<script src="interface.js"></script>
 </body>
