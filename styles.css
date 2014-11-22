@@ -98,34 +98,34 @@ body {
     padding: 0;
 }
 .controls .edit {
-    display: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 .controls .edit .button {
     padding: 10px 20px;
-    margin: 5px;
     color: white;
-    font-size: 20px;
     text-align: center;
-    width: auto;
     border-radius: 10px;
     cursor: pointer;
     transition: background 0.3s;
 }
 .controls .edit .button.go {
-    float: right;
     background: #34d96e;
 }
 .controls .edit .button.go:hover {
     background: #3dff7e;
 }
 .controls .edit .button.slide {
-    float: left;
     background: #a1c4a6;
-    font-size: initial;
     width: 100px;
 }
 .controls .edit .button.slide:hover {
     background: #cbd0a7;
+}
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
 }
 .gallery-item {
     float: left;
@@ -134,13 +134,6 @@ body {
     cursor: pointer;
 }
 
-.clearfix:after {
-    content: "";
-    width: 0;
-    height: 0;
-    display: block;
-    clear: both;
-}
 .canvas-inside {
     flex: 3 1 600px;
     align-self: stretch;
@@ -157,4 +150,3 @@ body {
     .canvas-inside {
         flex: 1 0 0px;
     }
-}

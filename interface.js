@@ -3,7 +3,9 @@ var graph;
 $(document).ready(function(){
 	
 	var galleryShown = false;
-	$(".controls .edit .gallery").hide();
+    $(".controls .edit")
+        .hide()
+        .find(".gallery").hide();
 	
 	graph = $("#graph");
 	canvas = new Canvas();
