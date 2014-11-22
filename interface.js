@@ -1,10 +1,12 @@
+var canvas;
+var graph;
 $(document).ready(function(){
 	
 	var galleryShown = false;
 	$(".controls .edit .gallery").hide();
 	
-	var graph = $("#graph");
-	var canvas = new Canvas();
+	graph = $("#graph");
+	canvas = new Canvas();
 	canvas.attachCanvas("graph");
 	
 	$(".controls .add").click(function(){
@@ -135,18 +137,12 @@ $(document).ready(function(){
 					.end();
 			})
 		.end();
-	var key = 256;
 	$(window).resize(function(){
-        //console.log(graph.parent().innerHeight(), graph.parent().height(), $(".canvas-inside").height());
-		graph
-			.attr("width", graph.width())
-			.attr("height", graph.height());
-        if(key == 256)
-        {
-            key = 42;
-            $("#graph").attr("height", 10).resize();
-            key = 256;
-        }
+        graph
+            .attr("width", 1)
+            .attr("height", 1)
+            .attr("width", graph.parent().width())
+            .attr("height", graph.parent().height());
         
 		canvas.resize();
 	}).resize();
@@ -162,6 +158,3 @@ $(document).ready(function(){
 		.on("touchend", function(event){ canvas.endScroll() })
 		.on("touchcansel", function(event){ canvas.endScroll() });
 });
-
-function awesome() {
-}

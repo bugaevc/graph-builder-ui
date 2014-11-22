@@ -16,7 +16,7 @@ p {
 
 body {
     display: flex;
-    flex-flow: row wrap;
+    flex-direction: row;
     margin: 0;
     /*width: 100vw;
     height: 100vh;*/
@@ -28,8 +28,8 @@ body {
     padding: 10px;
     background: white;
 	box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.5);
-    height: -webkit-min-content;
 }
+
 .controls ul {
     list-style: none;
     margin: 0;
@@ -143,9 +143,20 @@ body {
     display: block;
     clear: both;
 }
-canvas#graph {
+.canvas-inside {
     flex: 3 1 600px;
     align-self: stretch;
-    position: relative;
 }
 
+
+@media screen and (max-width: 600px) {
+    body {
+        flex-direction: column;
+    }
+    .controls {
+        flex: 0 0 20vh;
+    }
+    .canvas-inside {
+        flex: 1 0 0px;
+    }
+}
