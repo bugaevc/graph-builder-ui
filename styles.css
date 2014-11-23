@@ -126,10 +126,10 @@ body {
 .gallery {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-around;
 }
 .gallery-item {
-    float: left;
-    margin: 5px;
     padding: 10px;
     cursor: pointer;
 }
