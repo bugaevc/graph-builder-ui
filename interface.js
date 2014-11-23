@@ -140,6 +140,9 @@ $(document).ready(function(){
 			})
 		.end();
 	$(window).resize(function(){
+        // Magic!
+        // We shrink the canvas so that it doesn't affect its container size
+        // Then calculate its size and the restore canvas size back
         graph
             .attr("width", 1)
             .attr("height", 1)
