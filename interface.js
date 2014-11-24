@@ -32,10 +32,22 @@ $(document).ready(function(){
 		canvas.redraw();
 	});
     
+    function workCurrent(el) {
+        el.siblings().not(el).toggleClass("grey");
+        el.toggleClass("current");
+    }
+    
     function makeCurrent(el) {
-        el.siblings().not(el).addClass("grey");
-        el.addClass("current");
+        workCurrent(el);
         $(".edit").appendTo(el).slideDown();
+    }
+    
+    function finishCurrent(el, callback) {
+        workCurrent(el);
+        $(".edit").slideUp(function(){
+            $(this).appendTo(el.closest(".controls"));
+            callback();
+        });
     }
     
     $('.controls').on("change", '.function .options input[type="checkbox"]', function(){
@@ -89,7 +101,14 @@ $(document).ready(function(){
     
 	$(".controls").on("click", ".function:not(.current) p", function(){
 		var curFunc = $(this).closest(".function");
-        makeCurrent(curFunc);
+        if(curFunc.hasClass("current"))
+            return;
+        function act() { makeCurrent(curFunc); }
+        if(curFunc.hasClass("grey"))
+            finishCurrent(curFunc.siblings(".current"), act);
+        else
+            act();
+        
 	});
 
 	
