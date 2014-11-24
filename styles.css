@@ -46,7 +46,10 @@ body {
     flex-wrap: wrap;
     align-items: center;
     padding: 10px;
-    transition: background 0.5s;
+    transition: background 0.5s, opacity 0.5s;
+}
+.controls .function.grey {
+    opacity: 0.5;
 }
 .controls .function:not(.current):hover {
     background: #eee;
@@ -155,3 +158,4 @@ body {
     .canvas-inside {
         flex: 1 0 0px;
     }
+}

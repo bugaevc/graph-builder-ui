@@ -32,6 +32,12 @@ $(document).ready(function(){
 		canvas.redraw();
 	});
     
+    function makeCurrent(el) {
+        el.siblings().not(el).addClass("grey");
+        el.addClass("current");
+        $(".edit").appendTo(el).slideDown();
+    }
+    
     $('.controls').on("change", '.function .options input[type="checkbox"]', function(){
         var $this = $(this);
         var ind = $this.closest(".function").data("funcs-index");
@@ -83,26 +89,7 @@ $(document).ready(function(){
     
 	$(".controls").on("click", ".function:not(.current) p", function(){
 		var curFunc = $(this).closest(".function");
-		var hidden = '<div class="hidden"></div>';
-		// workaround strange obj.prevAll().wrapAll() behaviuor (reverse order)
-		function _prevAll(obj){
-			var first = obj.siblings().addBack().first().not(obj);
-			return first.nextUntil(obj).add(first);
-		}
-		_prevAll(curFunc).filter(".function").wrapAll(hidden);
-		curFunc.nextAll().filter(".function").wrapAll(hidden);
-		curFunc.closest(".controls")
-			.find(".add")
-				.wrapAll(hidden)
-			.end()
-			.find(".edit")
-				.slideDown()
-			.end()
-			.find(".hidden")
-				.slideUp()
-			.end();
-		curFunc.addClass("current");
-		curFunc.find(".editor").prop("contenteditable", "true").focus();
+        makeCurrent(curFunc);
 	});
 
 	
