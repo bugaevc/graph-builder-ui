@@ -98,6 +98,7 @@ $(document).ready(function(){
     .on("touchcansel", function(event){ canvas.endScroll() });
 	
 	$(".controls .add").click(function(){
+        finishCurrent();
 		var fBody = '3*x+3';
 		var newFunc = canvas.addFunction();
 		newFunc.setExpression(fBody);
