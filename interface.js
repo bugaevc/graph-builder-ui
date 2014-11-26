@@ -9,9 +9,18 @@ function workCurrent(el) {
 
 function makeCurrent(el) {
     workCurrent(el);
+    var func = canvas.getFunction(el.data("funcs-index"));
+    var color = func.color;
+    var enabled = func.enabled;
     $(".edit")
         .appendTo(el).slideDown()
-        .find("");
+        .find("input")
+            .filter('[type="color"]')
+                .spectrum("set", color)
+            .end()
+            .filter('[type="checkbox"]')
+                .prop("checked", enabled)
+            .end();
 }
 
 function finishCurrent(callback) {
@@ -101,9 +110,6 @@ $(document).ready(function(){
             .find(".editor")
                 .html(fBody)
             .end();
-        /* var inputColor = fHtml.find('input[type="color"]');
-        make_spectrum(inputColor);
-        newFunc.setColor('#6FA8DC'); */
 		canvas.redraw();
 	});
     
@@ -129,7 +135,7 @@ $(document).ready(function(){
         });
     });
     
-	$(".controls").on("click", ".function:not(.current) p", function(){
+	$(".controls").on("click", ".function p", function(){
 		var curFunc = $(this).closest(".function");
         if(curFunc.hasClass("current"))
             return;
@@ -138,7 +144,6 @@ $(document).ready(function(){
             finishCurrent(act);
         else
             act();
-        
 	});
 
 	$(".controls").on("input", ".function .editor", function(){
