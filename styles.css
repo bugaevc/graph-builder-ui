@@ -47,17 +47,20 @@ body {
     align-items: center;
     padding: 10px;
     background: white;
-    transition: background 0.5s, opacity 0.5s;
+    transition: background 0.5s, opacity 0.5s, box-shadow 0.5s;
 }
 .controls .function.grey {
     opacity: 0.5;
 }
-.controls .function:not(.current):hover {
-    background: #eee;
+.controls .function:hover {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+}
+.controls .function.grey:hover {
+    opacity: 0.75;
 }
 .controls .function p {
-    padding: 5px 10px;
     font-size: 30px;
+    padding: 5px 10px;
     cursor: pointer;
 }
 .controls .function .editor {
