@@ -1,6 +1,5 @@
 var canvas = new Canvas();
 var graph;
-var galleryShown = false;
 
 function workCurrent(el) {
     el.siblings().not(el).toggleClass("grey");
@@ -162,8 +161,9 @@ $(document).ready(function(){
 		.find(".slide")
 			.click(function(){
 				$(this).closest(".edit").find(".gallery").slideToggle();
-				galleryShown = !galleryShown;
-				$(this).text((galleryShown?"Hide":"Show") + " functions");
+				$(this).find("i")
+                    .toggleClass("fa-angle-double-down")
+                    .toggleClass("fa-angle-double-up");
 			})
 		.end()
 		.find(".go")

@@ -42,9 +42,6 @@ body {
     margin: 10px 5px;
     box-shadow: 0 3px 9px rgba(0, 0, 0, 0.3);
     border-radius: 2px;
-    /* display: flex;
-    flex-wrap: wrap;
-    align-items: center; */
     padding: 10px;
     background: white;
     transition: background 0.5s, opacity 0.5s, box-shadow 0.5s;
@@ -115,9 +112,10 @@ body {
 }
 .controls .edit .buttons {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
-.controls .edit .buttons * {
+.controls .edit .buttons > * {
     padding: 10px 20px;
     color: white;
     text-align: center;
@@ -133,7 +131,6 @@ body {
 }
 .controls .edit .buttons .slide {
     background: #a1c4a6;
-    width: 100px;
 }
 .controls .edit .buttons .slide:hover {
     background: #cbd0a7;
