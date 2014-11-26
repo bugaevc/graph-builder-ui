@@ -59,6 +59,7 @@ body {
     opacity: 0.75;
 }
 .controls .function > p {
+    text-align: center;
     font-size: 30px;
     padding: 5px 10px;
     cursor: pointer;

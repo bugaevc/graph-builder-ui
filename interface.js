@@ -36,7 +36,7 @@ function finishCurrent(callback) {
     }
     workCurrent(el);
     el.find(".editor").prop("contenteditable", "false");
-    $(".edit").slideUp(function(){
+    $(".edit").slideUp("fast", function(){
         $(this).appendTo(el.closest(".controls"));
         callback();
     });
