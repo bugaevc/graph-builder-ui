@@ -129,7 +129,7 @@ $(document).ready(function(){
         canvas.redraw();
         var editPanel = $(this).closest(".controls").find(".edit");
         if(editPanel.filter(":visible").length > 0)
-            editPanel.find(".button.go").click();
+            editPanel.find(".buttons .go").click();
         $function.nextAll().find(".function").addBack().filter(".function").each(function(){
             $(this).data("funcs-index", $(this).data("funcs-index")-1);
         });
@@ -155,15 +155,15 @@ $(document).ready(function(){
 		canvas.getFunction(ind).setExpression($this.text());
 		canvas.redraw();
 	});
-	$(".controls .edit .button")
-		.filter(".slide")
+	$(".controls .edit .buttons")
+		.find(".slide")
 			.click(function(){
 				$(this).closest(".edit").find(".gallery").slideToggle();
 				galleryShown = !galleryShown;
 				$(this).text((galleryShown?"Hide":"Show") + " functions");
 			})
 		.end()
-		.filter(".go")
+		.find(".go")
 			.click(function(){finishCurrent(); })
 		.end();
 });

@@ -116,7 +116,7 @@ body {
     display: flex;
     justify-content: space-between;
 }
-.controls .edit .button {
+.controls .edit .buttons * {
     padding: 10px 20px;
     color: white;
     text-align: center;
