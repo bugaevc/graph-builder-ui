@@ -8,29 +8,37 @@ function workCurrent(el) {
 }
 
 function makeCurrent(el) {
-    workCurrent(el);
-    el.find(".editor").prop("contenteditable", "true").focus();
-    var func = canvas.getFunction(el.data("funcs-index"));
-    var color = func.color;
-    var enabled = func.enabled;
-    $(".edit")
-        .appendTo(el).slideDown()
-        .find("input")
-            .filter('[type="color"]')
-                .spectrum("set", color)
-            .end()
-            .filter('[type="checkbox"]')
-                .prop("checked", enabled)
-            .end();
+    finishCurrent(function(){
+        workCurrent(el);
+        el.find(".editor").prop("contenteditable", "true").focus();
+        var func = canvas.getFunction(el.data("funcs-index"));
+        var color = func.color;
+        var enabled = func.enabled;
+        $(".edit")
+            .appendTo(el).slideDown()
+            .find("input")
+                .filter('[type="color"]')
+                    .spectrum("set", color)
+                .end()
+                .filter('[type="checkbox"]')
+                    .prop("checked", enabled)
+                .end();
+    });
 }
 
 function finishCurrent(callback) {
+    callback = callback || $.noop;
     var el = $(".controls .function.current");
+    if(el.length === 0)
+    {
+        callback();
+        return;
+    }
     workCurrent(el);
     el.find(".editor").prop("contenteditable", "false");
     $(".edit").slideUp(function(){
         $(this).appendTo(el.closest(".controls"));
-        if(callback) callback();
+        callback();
     });
 }
 
@@ -98,7 +106,6 @@ $(document).ready(function(){
     .on("touchcansel", function(event){ canvas.endScroll() });
 	
 	$(".controls .add").click(function(){
-        finishCurrent();
 		var fBody = '3*x+3';
 		var newFunc = canvas.addFunction();
 		newFunc.setExpression(fBody);
@@ -108,11 +115,11 @@ $(document).ready(function(){
             .hide()
             .removeClass("template")
             .addClass("function")
-            .slideDown()
-            .data("funcs-index", canvas.functions.length)
             .find(".editor")
                 .html(fBody)
-            .end();
+            .end()
+            .data("funcs-index", canvas.functions.length)
+            .slideDown(function() { makeCurrent(fHtml); });
 		canvas.redraw();
 	});
     
@@ -142,11 +149,7 @@ $(document).ready(function(){
 		var curFunc = $(this).closest(".function");
         if(curFunc.hasClass("current"))
             return;
-        function act() { makeCurrent(curFunc); }
-        if(curFunc.hasClass("grey"))
-            finishCurrent(act);
-        else
-            act();
+        makeCurrent(curFunc);
 	});
 
 	$(".controls").on("input", ".function .editor", function(){
