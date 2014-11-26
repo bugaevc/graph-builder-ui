@@ -42,9 +42,9 @@ body {
     margin: 10px 5px;
     box-shadow: 0 3px 9px rgba(0, 0, 0, 0.3);
     border-radius: 2px;
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: center; */
     padding: 10px;
     background: white;
     transition: background 0.5s, opacity 0.5s, box-shadow 0.5s;
@@ -58,7 +58,7 @@ body {
 .controls .function.grey:hover {
     opacity: 0.75;
 }
-.controls .function p {
+.controls .function > p {
     font-size: 30px;
     padding: 5px 10px;
     cursor: pointer;
@@ -66,7 +66,7 @@ body {
 .controls .function .editor {
     outline: none;
 }
-.controls .function.current p {
+.controls .function.current > p {
     border: 1px solid #8aceff;
     border-radius: 5px;
     box-shadow: 0 0 2px 1px #8aceff;
@@ -74,12 +74,11 @@ body {
 .controls .function .options {
     font-size: 15px;
     margin: 0;
-    margin-left: auto;
-    width: 100px;
     height: 1em;
     padding: 5px 0;
+    margin: 10px 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -111,7 +110,10 @@ body {
 }
 .controls .edit {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+}
+.controls .edit .buttons {
+    display: flex;
     justify-content: space-between;
 }
 .controls .edit .button {
@@ -122,17 +124,17 @@ body {
     cursor: pointer;
     transition: background 0.3s;
 }
-.controls .edit .button.go {
+.controls .edit .buttons .go {
     background: #34d96e;
 }
-.controls .edit .button.go:hover {
+.controls .edit .buttons .go:hover {
     background: #3dff7e;
 }
-.controls .edit .button.slide {
+.controls .edit .buttons .slide {
     background: #a1c4a6;
     width: 100px;
 }
-.controls .edit .button.slide:hover {
+.controls .edit .buttons .slide:hover {
     background: #cbd0a7;
 }
 .gallery {
