@@ -9,6 +9,7 @@ function workCurrent(el) {
 
 function makeCurrent(el) {
     workCurrent(el);
+    el.find(".editor").prop("contenteditable", "true").focus();
     var func = canvas.getFunction(el.data("funcs-index"));
     var color = func.color;
     var enabled = func.enabled;
@@ -26,6 +27,7 @@ function makeCurrent(el) {
 function finishCurrent(callback) {
     var el = $(".controls .function.current");
     workCurrent(el);
+    el.find(".editor").prop("contenteditable", "false");
     $(".edit").slideUp(function(){
         $(this).appendTo(el.closest(".controls"));
         if(callback) callback();
