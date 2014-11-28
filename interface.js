@@ -116,6 +116,7 @@ $(document).ready(function(){
             .addClass("function")
             .find(".editor")
                 .html(fBody)
+                .mathquill('editable')
             .end()
             .data("funcs-index", canvas.functions.length)
             .slideDown(function() { makeCurrent(fHtml); });
