@@ -61,13 +61,8 @@ body {
     padding: 5px 10px;
     cursor: pointer;
 }
-.controls .function .editor {
-    outline: none;
-}
-.controls .function.current > p {
-    border: 1px solid #8aceff;
-    border-radius: 5px;
-    box-shadow: 0 0 2px 1px #8aceff;
+ .controls .function .editor {
+    border: none;
 }
 .controls .function .options {
     font-size: 15px;
