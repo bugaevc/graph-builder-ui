@@ -106,19 +106,20 @@ $(document).ready(function(){
 	$(".controls .add").click(function(){
 		var fBody = '3x+2';
 		var newFunc = canvas.addFunction();
-		newFunc.setExpression(fBody);
         var fHtml = $(this).closest(".controls").find("ul .template").clone();
 		$(this).closest(".controls").find("ul").append(fHtml);
         fHtml
             .hide()
             .removeClass("template")
             .addClass("function")
+            .data("funcs-index", canvas.functions.length)
             .find(".editor")
                 .html(fBody)
-                .mathquill('editable')  
+                .mathquill('editable')
+                .change()
             .end()
-            .data("funcs-index", canvas.functions.length)
             .slideDown(function() { makeCurrent(fHtml); });
+            
 		canvas.redraw();
 	});
     
@@ -151,10 +152,11 @@ $(document).ready(function(){
         makeCurrent(curFunc);
 	});
 
-	$(".controls").on("input", ".function .editor", function(){
+	$(".controls").on("input keydown keypress keyup change", ".function .editor", function(){
 		var $this = $(this);
 		var ind = $this.closest(".function").data("funcs-index");
-		canvas.getFunction(ind).setExpression($this.text());
+        var latex = $this.mathquill("latex");
+		canvas.getFunction(ind).setExpression(latex_parser.parse(latex));
 		canvas.redraw();
 	});
 	$(".controls .edit .buttons")
