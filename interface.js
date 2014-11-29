@@ -154,8 +154,11 @@ $(document).ready(function(){
 
 	$(".controls").on("input keydown keypress keyup change", ".function .editor", function(){
 		var $this = $(this);
-		var ind = $this.closest(".function").data("funcs-index");
         var latex = $this.mathquill("latex");
+        if(latex === $this.data("latex-cache"))
+            return;
+        $this.data("latex-cache", latex);
+		var ind = $this.closest(".function").data("funcs-index");
 		canvas.getFunction(ind).setExpression(latex_parser.parse(latex));
 		canvas.redraw();
 	});
