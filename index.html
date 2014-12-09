@@ -2,18 +2,25 @@
 <head>
 	<title>uitest</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    
 	<link rel="stylesheet" href="styles.css"/>
     <link rel='stylesheet' href='http://bgrins.github.io/spectrum/spectrum.css' />
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src='http://bgrins.github.io/spectrum/spectrum.js'></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="mathquill-0.9.3/mathquill.css" />
+    
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://bgrins.github.io/spectrum/spectrum.js"></script>
+    <script src="mathquill-0.9.3/mathquill.min.js" /></script>
+    <script src="latex_parser.js"></script>
+    
 	<script src="http://anton.kroko.ru/builder/unstable/core.js"></script>
+	<script src="interface.js"></script>
 </head>
 <body>
 	<div class="controls">
 		<ul>
 			<li class="template">
-                <p>y=<span class="editor"></span></p>                
+                <p><span class="editor"></span></p>                
             </li>
 		</ul>
 		<p class="add"><i class="fa fa-plus"></i></p>
@@ -36,6 +43,5 @@
 		</div>
 	</div>
 	<div class="canvas-inside"><canvas id="graph"></canvas></div>
-	<script src="interface.js"></script>
 </body>
 </html>

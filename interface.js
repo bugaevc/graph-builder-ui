@@ -9,7 +9,7 @@ function workCurrent(el) {
 function makeCurrent(el) {
     finishCurrent(function(){
         workCurrent(el);
-        el.find(".editor").prop("contenteditable", "true").focus();
+        el.find(".editor textarea").focus();
         var func = canvas.getFunction(el.data("funcs-index"));
         var color = func.color;
         var enabled = func.enabled;
@@ -34,7 +34,6 @@ function finishCurrent(callback) {
         return;
     }
     workCurrent(el);
-    el.find(".editor").prop("contenteditable", "false");
     $(".edit").slideUp("fast", function(){
         $(this).appendTo(el.closest(".controls"));
         callback();
@@ -105,20 +104,22 @@ $(document).ready(function(){
     .on("touchcansel", function(event){ canvas.endScroll() });
 	
 	$(".controls .add").click(function(){
-		var fBody = '3*x+3';
+		var fBody = '3x+2';
 		var newFunc = canvas.addFunction();
-		newFunc.setExpression(fBody);
         var fHtml = $(this).closest(".controls").find("ul .template").clone();
 		$(this).closest(".controls").find("ul").append(fHtml);
         fHtml
             .hide()
             .removeClass("template")
             .addClass("function")
+            .data("funcs-index", canvas.functions.length)
             .find(".editor")
                 .html(fBody)
+                .mathquill('editable')
+                .change()
             .end()
-            .data("funcs-index", canvas.functions.length)
             .slideDown(function() { makeCurrent(fHtml); });
+            
 		canvas.redraw();
 	});
     
@@ -151,10 +152,14 @@ $(document).ready(function(){
         makeCurrent(curFunc);
 	});
 
-	$(".controls").on("input", ".function .editor", function(){
+	$(".controls").on("input keydown keypress keyup change", ".function .editor", function(){
 		var $this = $(this);
+        var latex = $this.mathquill("latex");
+        if(latex === $this.data("latex-cache"))
+            return;
+        $this.data("latex-cache", latex);
 		var ind = $this.closest(".function").data("funcs-index");
-		canvas.getFunction(ind).setExpression($this.text());
+		canvas.getFunction(ind).setExpression(latex_parser.parse(latex));
 		canvas.redraw();
 	});
 	$(".controls .edit .buttons")
