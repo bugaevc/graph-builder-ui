@@ -75,11 +75,11 @@ $(document).ready(function(){
         .find('input[type="color"]')
             .spectrum(spectrum_options)
         .end();
-	
-	graph = $("#graph");
-	canvas.attachCanvas("graph");
     
-	$(window).resize(function(){
+    graph = $("#graph");
+    canvas.attachCanvas("graph");
+    
+    $(window).resize(function(){
         // Magic!
         // We shrink the canvas so that it doesn't affect its container size
         // Then calculate its size and then restore canvas size back
@@ -89,9 +89,9 @@ $(document).ready(function(){
         .attr("width", graph.parent().width())
         .attr("height", graph.parent().height());
         
-		canvas.resize();
-	}).resize();
-	graph
+        canvas.resize();
+    }).resize();
+    graph
     .on("mousedown", function(event){ canvas.startScroll(event.originalEvent) })
     .on("mousemove", function(event){ canvas.scroll(event.originalEvent) })
     .on("mouseup", function(event){ canvas.endScroll() })
@@ -102,12 +102,12 @@ $(document).ready(function(){
     .on("touchmove", function(event){ canvas.touchScroll(event.originalEvent) })
     .on("touchend", function(event){ canvas.endScroll() })
     .on("touchcansel", function(event){ canvas.endScroll() });
-	
-	$(".controls .add").click(function(){
-		var fBody = '3x+2';
-		var newFunc = canvas.addFunction();
+    
+    $(".controls .add").click(function(){
+        var fBody = '3x+2';
+        var newFunc = canvas.addFunction();
         var fHtml = $(this).closest(".controls").find("ul .template").clone();
-		$(this).closest(".controls").find("ul").append(fHtml);
+        $(this).closest(".controls").find("ul").append(fHtml);
         fHtml
             .hide()
             .removeClass("template")
@@ -120,8 +120,8 @@ $(document).ready(function(){
             .end()
             .slideDown(function() { makeCurrent(fHtml); });
             
-		canvas.redraw();
-	});
+        canvas.redraw();
+    });
     
     $('.controls').on("change", '.function .options input[type="checkbox"]', function(){
         var $this = $(this);
@@ -145,33 +145,33 @@ $(document).ready(function(){
         });
     });
     
-	$(".controls").on("click", ".function p", function(){
-		var curFunc = $(this).closest(".function");
+    $(".controls").on("click", ".function p", function(){
+        var curFunc = $(this).closest(".function");
         if(curFunc.hasClass("current"))
             return;
         makeCurrent(curFunc);
-	});
+    });
 
-	$(".controls").on("input keydown keypress keyup change", ".function .editor", function(){
-		var $this = $(this);
+    $(".controls").on("input keydown keypress keyup change", ".function .editor", function(){
+        var $this = $(this);
         var latex = $this.mathquill("latex");
         if(latex === $this.data("latex-cache"))
             return;
         $this.data("latex-cache", latex);
-		var ind = $this.closest(".function").data("funcs-index");
-		canvas.getFunction(ind).setExpression(latex_parser.parse(latex));
-		canvas.redraw();
-	});
-	$(".controls .edit .buttons")
-		.find(".slide")
-			.click(function(){
-				$(this).closest(".edit").find(".gallery").slideToggle();
-				$(this).find("i")
+        var ind = $this.closest(".function").data("funcs-index");
+        canvas.getFunction(ind).setExpression(latex_parser.parse(latex));
+        canvas.redraw();
+    });
+    $(".controls .edit .buttons")
+        .find(".slide")
+            .click(function(){
+                $(this).closest(".edit").find(".gallery").slideToggle();
+                $(this).find("i")
                     .toggleClass("fa-angle-double-down")
                     .toggleClass("fa-angle-double-up");
-			})
-		.end()
-		.find(".go")
-			.click(function(){finishCurrent(); })
-		.end();
+            })
+        .end()
+        .find(".go")
+            .click(function(){finishCurrent(); })
+        .end();
 });
