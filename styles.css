@@ -147,7 +147,7 @@ body {
 }
 
 
-@media (orientation: portrait) {
+@media (orientation: portrait), (max-width: 690px) {
     body {
         flex-direction: column;
     }
