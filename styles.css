@@ -39,6 +39,8 @@ body {
     display: none;
 }
 .controls .function {
+    display: flex;
+    flex-direction: column;
     margin: 10px 5px;
     box-shadow: 0 3px 9px rgba(0, 0, 0, 0.3);
     border-radius: 2px;
@@ -66,11 +68,10 @@ body {
 }
 .controls .function .options {
     font-size: 15px;
-    margin: 0;
-    height: 1em;
-    padding: 5px 0;
+    padding: 0;
     margin: 10px 0;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
 }
@@ -104,6 +105,12 @@ body {
 .controls .edit {
     display: flex;
     flex-direction: column;
+}
+.controls .color-input .sp-preview {
+    margin: 0;
+}
+.controls .color-input .sp-dd {
+    display: none;
 }
 .controls .edit .buttons {
     display: flex;
@@ -153,6 +160,22 @@ body {
     }
     .controls {
         flex: 0 0 20vh;
+    }
+    .controls .function {
+        flex-flow: row wrap;
+    }
+    .controls .edit {
+        flex-direction: row;
+        align-items: center;
+        flex-grow: 1;
+    }
+    .controls .edit .options {
+        flex: 2 1 70px;
+        margin-right: 5%;
+    }
+    .controls .edit .buttons {
+        flex: 1 100 200px;
+        min-width: 120px;
     }
     .canvas-inside {
         flex: 1 0 0px;
