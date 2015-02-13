@@ -24,7 +24,8 @@ pow
   / primary
 
 primary
-  = int
+  = double
+  / int
   / "\\left"? "(" del additive:add "\\right"? ")" del { return '(' + additive + ')'; }
   / "\\left"? "|" del additive:add "\\right"? "|" del { return 'abs(' + additive + ')'; }
   / "{" del additive:add "}" del { return '(' + additive + ')'; }
@@ -59,6 +60,9 @@ command
 
 int
   = digits:[0-9]+ del { return digits.join(""); }
+
+double
+  = int_part:[0-9]* "." fract_part:[0-9]* del { return int_part.join("") + '.' + fract_part.join(""); }
 
 del
   = [ ]*
